@@ -1,0 +1,467 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Orbit Architect | Spacecraft Workshop</title>
+
+    <link rel="stylesheet" href="CSS/global.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 25px 15px;
+            color: #eef6ff;
+            background:
+                radial-gradient(circle at top, #18345d, #080f20 55%, #030711);
+            font-family: 'VT323', monospace;
+        }
+
+        .workshop {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .workshop-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 18px 0;
+            border-bottom: 1px solid #29476b;
+        }
+
+        .workshop-logo {
+            color: #57caff;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 12px;
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: #9fcfff;
+            text-decoration: none;
+            font-size: 23px;
+        }
+
+        .workshop-header {
+            text-align: center;
+            padding: 45px 10px 30px;
+        }
+
+        .eyebrow {
+            color: #55caff;
+            letter-spacing: 4px;
+            font-size: 21px;
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: clamp(22px, 5vw, 38px);
+            line-height: 1.6;
+            margin: 18px 0;
+        }
+
+        .workshop-header p {
+            color: #a8bdd8;
+            font-size: 25px;
+        }
+
+        .credits-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 20px;
+            margin-bottom: 22px;
+            background: #102440;
+            border: 1px solid #2e6594;
+            border-radius: 12px;
+        }
+
+        .credits-panel strong {
+            color: #6de9bd;
+            font-size: 35px;
+        }
+
+        .credits-panel span {
+            color: #a9c1dc;
+            font-size: 22px;
+        }
+
+        .workshop-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 22px;
+        }
+
+        .panel {
+            padding: 24px;
+            background: linear-gradient(145deg, #122440, #0b172c);
+            border: 1px solid #29476b;
+            border-radius: 14px;
+        }
+
+        .panel h2 {
+            color: #6ccfff;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+            margin: 0 0 20px;
+        }
+
+        .ship-display {
+            min-height: 300px;
+            display: grid;
+            place-items: center;
+            text-align: center;
+            background:
+                radial-gradient(circle, #183d68 0%, #0b1a31 60%, #081225 100%);
+            border: 1px solid #28517b;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .ship-icon {
+            font-size: 110px;
+            filter: drop-shadow(0 0 22px #3daeff);
+        }
+
+        .ship-caption {
+            color: #9fc4e8;
+            font-size: 24px;
+            letter-spacing: 2px;
+        }
+
+        .stat-row {
+            margin-top: 22px;
+        }
+
+        .stat-heading {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 22px;
+        }
+
+        .stat-heading strong {
+            color: #70d8ff;
+        }
+
+        .bar {
+            height: 12px;
+            background: #263c58;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, #168dff, #50e4c2);
+            transition: width 0.3s;
+        }
+
+        .upgrade-list {
+            display: grid;
+            gap: 13px;
+        }
+
+        .upgrade {
+            padding: 17px;
+            background: #10213b;
+            border: 1px solid #29476b;
+            border-radius: 10px;
+        }
+
+        .upgrade-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .upgrade h3 {
+            margin: 0;
+            color: #ffffff;
+            font-size: 25px;
+        }
+
+        .upgrade p {
+            color: #9bb2ce;
+            font-size: 20px;
+            margin: 9px 0 14px;
+        }
+
+        .upgrade-level {
+            color: #70e5bf;
+            font-size: 19px;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            padding: 12px 15px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 9px;
+            transition: 0.2s;
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            filter: brightness(1.2);
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+            opacity: 0.45;
+        }
+
+        .buy-button {
+            width: 100%;
+            background: #168dff;
+            color: white;
+        }
+
+        .repair-button {
+            width: 100%;
+            margin-top: 15px;
+            background: #16b98b;
+            color: #041b16;
+        }
+
+        .message {
+            min-height: 35px;
+            margin-top: 18px;
+            color: #72e8bc;
+            text-align: center;
+            font-size: 23px;
+        }
+
+        .message.error {
+            color: #ff8585;
+        }
+
+        .readiness {
+            margin-top: 22px;
+            padding: 22px;
+            background: #102440;
+            border: 1px solid #2d5c87;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .readiness h2 {
+            color: #6ccfff;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .readiness strong {
+            display: block;
+            color: #6de9bd;
+            font-size: 30px;
+            margin: 12px 0;
+        }
+
+        .readiness p {
+            color: #a9bfd9;
+            font-size: 21px;
+        }
+
+        .workshop-footer {
+            padding: 35px 10px 15px;
+            text-align: center;
+            color: #617895;
+            font-size: 20px;
+        }
+
+        @media (max-width: 750px) {
+            .workshop-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<main class="workshop">
+
+    <nav class="workshop-nav">
+        <a href="index.html" class="workshop-logo">ORBIT ARCHITECT</a>
+        <a href="index.html" class="back-link">← RETURN HOME</a>
+    </nav>
+
+    <header class="workshop-header">
+        <p class="eyebrow">SPACECRAFT ENGINEERING DIVISION</p>
+        <h1>SPACECRAFT WORKSHOP</h1>
+        <p>Commander, prepare your spacecraft for deep-space exploration.</p>
+    </header>
+
+    <section class="credits-panel">
+        <div>
+            <span>AVAILABLE WORKSHOP CREDITS</span>
+            <br>
+            <strong id="creditsValue">1000</strong>
+        </div>
+
+        <span>USE CREDITS TO REPAIR AND UPGRADE YOUR SHIP</span>
+    </section>
+
+    <section class="workshop-layout">
+
+        <div class="panel">
+
+            <h2>SPACECRAFT STATUS</h2>
+
+            <div class="ship-display">
+                <div>
+                    <div class="ship-icon">🚀</div>
+                    <div class="ship-caption">ORBIT EXPLORER MK-I</div>
+                </div>
+            </div>
+
+            <div class="stat-row">
+                <div class="stat-heading">
+                    <span>HULL INTEGRITY</span>
+                    <strong id="hullValue">100%</strong>
+                </div>
+                <div class="bar">
+                    <div class="bar-fill" id="hullBar"></div>
+                </div>
+            </div>
+
+            <div class="stat-row">
+                <div class="stat-heading">
+                    <span>FUEL CAPACITY</span>
+                    <strong id="fuelValue">100%</strong>
+                </div>
+                <div class="bar">
+                    <div class="bar-fill" id="fuelBar"></div>
+                </div>
+            </div>
+
+            <div class="stat-row">
+                <div class="stat-heading">
+                    <span>ENGINE POWER</span>
+                    <strong id="engineValue">100%</strong>
+                </div>
+                <div class="bar">
+                    <div class="bar-fill" id="engineBar"></div>
+                </div>
+            </div>
+
+            <div class="stat-row">
+                <div class="stat-heading">
+                    <span>SHIELD STRENGTH</span>
+                    <strong id="shieldValue">100%</strong>
+                </div>
+                <div class="bar">
+                    <div class="bar-fill" id="shieldBar"></div>
+                </div>
+            </div>
+
+            <button class="repair-button" id="repairButton">
+                REPAIR HULL — 100 CREDITS
+            </button>
+
+            <button class="repair-button" id="refuelButton">
+                REFILL FUEL — 75 CREDITS
+            </button>
+
+        </div>
+
+        <div class="panel">
+
+            <h2>AVAILABLE UPGRADES</h2>
+
+            <div class="upgrade-list">
+
+                <article class="upgrade">
+                    <div class="upgrade-top">
+                        <h3>🚀 Engine Booster</h3>
+                        <span class="upgrade-level" id="engineLevel">LEVEL 0</span>
+                    </div>
+                    <p>Improve your spacecraft's starting speed.</p>
+                    <button class="buy-button" id="buyEngine">
+                        UPGRADE — 150 CREDITS
+                    </button>
+                </article>
+
+                <article class="upgrade">
+                    <div class="upgrade-top">
+                        <h3>🛡️ Energy Shield</h3>
+                        <span class="upgrade-level" id="shieldLevel">LEVEL 0</span>
+                    </div>
+                    <p>Increase protection against asteroid collisions.</p>
+                    <button class="buy-button" id="buyShield">
+                        UPGRADE — 150 CREDITS
+                    </button>
+                </article>
+
+                <article class="upgrade">
+                    <div class="upgrade-top">
+                        <h3>⛽ Fuel Efficiency</h3>
+                        <span class="upgrade-level" id="fuelLevel">LEVEL 0</span>
+                    </div>
+                    <p>Improve fuel efficiency during your expedition.</p>
+                    <button class="buy-button" id="buyFuel">
+                        UPGRADE — 125 CREDITS
+                    </button>
+                </article>
+
+            </div>
+
+            <div class="message" id="workshopMessage" role="status" aria-live="polite">
+                WORKSHOP SYSTEM ONLINE.
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="readiness">
+        <h2>MISSION READINESS</h2>
+        <strong id="readinessValue">100%</strong>
+        <p id="readinessDescription">
+            Your spacecraft is ready for inspection.
+        </p>
+    </section>
+
+    <footer class="workshop-footer">
+        ORBIT ARCHITECT © 2026
+        <br><br>
+        ENGINEER YOUR SHIP. PREPARE FOR EUROPA.
+    </footer>
+    
+    <div style="text-align:center; margin:30px;">
+    <button
+        onclick="window.location.href='engineering.html'
+        "style="padding:16px 35px; font-size:18px; cursor:pointer;">
+        NEXT: START MISSION →
+    </button>
+</div>
+    
+</main>
+
+<script src="JS/workshop.js" defer></script>
+
+</body>
+</html>

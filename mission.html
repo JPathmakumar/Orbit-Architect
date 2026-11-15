@@ -1,0 +1,327 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Orbit Architect | Mission</title>
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="CSS/global.css">
+    <link rel="stylesheet" href="CSS/mission.css">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+<body class="mission-page">
+
+    <!-- TOP NAVIGATION -->
+    <header class="mission-header">
+
+        <div class="mission-logo">
+            ORBIT ARCHITECT
+        </div>
+
+        <div class="mission-status">
+            <span class="status-indicator"></span>
+            MISSION IN PROGRESS
+        </div>
+
+    </header>
+
+
+    <!-- MAIN GAME -->
+    <main class="mission-main">
+
+        <!-- MISSION TITLE -->
+        <section class="mission-title">
+
+            <p class="mission-subtitle">
+                DEEP SPACE EXPLORATION
+            </p>
+
+            <h1>SPACE NAVIGATION</h1>
+
+            <p>
+                Navigate through the solar system and survive the asteroid storm.
+            </p>
+
+        </section>
+
+
+        <!-- GAME CONTAINER -->
+        <section class="game-container">
+
+            <!-- GAME TOP BAR -->
+            <div class="game-topbar">
+
+                <div>
+                    <span class="game-label">MISSION</span>
+                    <strong>JUPITER EXPEDITION</strong>
+                </div>
+
+                <div id="gameStatus" class="game-status">
+                    AWAITING LAUNCH
+                </div>
+
+            </div>
+
+
+            <!-- CAMERA SWITCH -->
+            <div class="camera-switch">
+
+                <span id="cameraMode">
+                    SECOND PERSON
+                </span>
+
+                <button id="cameraButton">
+                    SWITCH CAMERA [C]
+                </button>
+
+            </div>
+
+
+            <!-- GAME SCREEN -->
+            <div class="game-screen">
+
+                <canvas
+                    id="gameCanvas"
+                    width="1000"
+                    height="600"
+                ></canvas>
+
+
+                <!-- START / GAME OVER OVERLAY -->
+                <div id="gameOverlay" class="game-overlay">
+
+                    <div class="overlay-content">
+
+                        <p class="overlay-small">
+                            NASA SPACE MISSION
+                        </p>
+
+                        <h2 id="overlayTitle">
+                            READY FOR LAUNCH?
+                        </h2>
+
+                        <p id="overlayDescription">
+                            Pilot your spacecraft through the solar system.
+                            Watch out for asteroids!
+                        </p>
+
+                        <button
+                            id="startMission"
+                            class="start-button"
+                        >
+                            START MISSION →
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DASHBOARD -->
+            <div class="mission-dashboard">
+
+
+                <!-- FUEL -->
+                <div class="stat-card">
+
+                    <div class="stat-heading">
+
+                        <span>⛽ FUEL</span>
+
+                        <span id="fuelValue">
+                            100%
+                        </span>
+
+                    </div>
+
+                    <div class="stat-bar">
+                        <div id="fuelBar"></div>
+                    </div>
+
+                </div>
+
+
+                <!-- POWER -->
+                <div class="stat-card">
+
+                    <div class="stat-heading">
+
+                        <span>⚡ POWER</span>
+
+                        <span id="powerValue">
+                            100%
+                        </span>
+
+                    </div>
+
+                    <div class="stat-bar">
+                        <div id="powerBar"></div>
+                    </div>
+
+                </div>
+
+
+                <!-- DISTANCE -->
+                <div class="stat-card distance-card">
+
+                    <div class="stat-heading">
+
+                        <span>📡 DISTANCE</span>
+
+                        <span id="distanceValue">
+                            0 KM
+                        </span>
+
+                    </div>
+
+                    <p class="stat-description">
+                        Distance travelled
+                    </p>
+
+                </div>
+
+
+                <!-- HULL HEALTH -->
+                <div
+                    class="stat-card hull-card"
+                    id="hullPanel"
+                    style="display: none;"
+                >
+
+                    <div class="stat-heading">
+
+                        <span>🛡 HULL INTEGRITY</span>
+
+                        <span id="hullValue">
+                            100%
+                        </span>
+
+                    </div>
+
+                    <div class="health-bar">
+                        <div id="hullBar"></div>
+                    </div>
+
+                    <p class="stat-description">
+                        Spacecraft structural health
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- OBJECTIVE -->
+            <div class="objective-panel">
+
+                <div class="objective-icon">
+                    🎯
+                </div>
+
+                <div>
+
+                    <span class="objective-label">
+                        CURRENT OBJECTIVE
+                    </span>
+
+                    <p id="objectiveText">
+                        Launch your spacecraft and begin your journey.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONTROLS -->
+            <div class="controls-panel">
+
+                <h3>SPACECRAFT CONTROLS</h3>
+
+                <div class="controls-grid">
+
+                    <div class="control-item">
+                        <span class="key">W</span>
+                        <span>Move forward</span>
+                    </div>
+
+                    <div class="control-item">
+                        <span class="key">S</span>
+                        <span>Slow down</span>
+                    </div>
+
+                    <div class="control-item">
+                        <span class="key">A</span>
+                        <span>Move left</span>
+                    </div>
+
+                    <div class="control-item">
+                        <span class="key">D</span>
+                        <span>Move right</span>
+                    </div>
+
+                    <div class="control-item">
+                        <span class="key">SHIFT</span>
+                        <span>Speed boost</span>
+                    </div>
+
+                    <div class="control-item">
+                        <span class="key">SPACE</span>
+                        <span>Emergency brake</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="mission-footer">
+
+        <p>ORBIT ARCHITECT © 2026</p>
+
+        <p>EXPLORING THE UNKNOWN</p>
+
+    </footer>
+
+
+<!-- ORBIT ARCHITECT JAVASCRIPT SYSTEMS -->
+
+<!-- 1. EVENT MANAGER -->
+<script src="JS/events.js" defer></script>
+
+<!-- 2. SCORING SYSTEM -->
+<script src="JS/scoring.js" defer></script>
+
+<!-- 3. SAVE SYSTEM -->
+<script src="JS/saveSystem.js" defer></script>
+
+<!-- 4. NASA DATASET -->
+<script src="JS/nasaData.js"></script>
+
+<script src="JS/spacecraftData.js"></script>
+
+<!-- 5. MAIN MISSION ENGINE -->
+<script src="JS/mission.js" defer></script>
+
+    
+</body>
+</html>

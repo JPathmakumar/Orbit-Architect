@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Spacecraft Mission Design | Orbit Architect</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="CSS/spacecraftDesign.css">
+</head>
+
+<body class="sd-page">
+
+    <header class="sd-topbar">
+        <a class="sd-brand" href="index.html">
+            <span class="sd-brand-dot"></span>
+            ORBIT ARCHITECT
+        </a>
+        <div class="sd-topbar-status">
+            <span class="sd-live-dot"></span>
+            DESIGN BAY ONLINE
+        </div>
+    </header>
+
+    <main class="sd-main">
+
+        <section class="sd-title">
+            <p class="sd-eyebrow">ORBIT ARCHITECT</p>
+            <h1>SPACECRAFT MISSION DESIGN</h1>
+            <p class="sd-subtitle">&ldquo;Every engineering decision shapes the success of your mission.&rdquo;</p>
+        </section>
+
+        <p class="sd-disclaimer">
+            All specifications below are fictional game values created for Orbit Architect.
+            They are not real NASA engineering data.
+        </p>
+
+        <div class="sd-layout">
+
+            <!-- LEFT: component selection -->
+            <div class="sd-systems" id="sdSystems"></div>
+
+            <!-- RIGHT: blueprint + live summary -->
+            <aside class="sd-side">
+
+                <section class="sd-panel sd-blueprint-panel" aria-label="Spacecraft blueprint">
+                    <div class="sd-panel-head">
+                        <span>SPACECRAFT BLUEPRINT</span>
+                        <span class="sd-tag" id="sdShipTag">CONFIG A</span>
+                    </div>
+
+                    <svg id="sdShip" class="sd-ship" viewBox="0 0 560 300" role="img"
+                         aria-label="Blueprint of your spacecraft">
+
+                        <defs>
+                            <pattern id="sdGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <path d="M20 0H0V20" fill="none" stroke="currentColor" stroke-width=".5" opacity=".18"/>
+                            </pattern>
+                            <linearGradient id="sdFlame" x1="1" y1="0" x2="0" y2="0">
+                                <stop offset="0" stop-color="#7fe4ff"/>
+                                <stop offset="1" stop-color="#7fe4ff" stop-opacity="0"/>
+                            </linearGradient>
+                        </defs>
+
+                        <rect width="560" height="300" fill="url(#sdGrid)" class="sd-bp-grid"/>
+
+                        <!-- hull -->
+                        <g class="sd-bp-hull">
+                            <path d="M170 120 H390 Q440 120 470 150 Q440 180 390 180 H170 Z"/>
+                            <path d="M250 120 V180 M330 120 V180" class="sd-bp-detail"/>
+                            <circle cx="400" cy="150" r="9" class="sd-bp-detail"/>
+                        </g>
+
+                        <!-- ENGINE -->
+                        <g class="sd-zone" data-zone="engine">
+                            <g class="sd-variant" data-system="engine" data-option="standard">
+                                <path d="M170 132 L145 138 L145 162 L170 168 Z"/>
+                                <path d="M145 136 L122 128 L122 172 L145 164 Z"/>
+                            </g>
+                            <g class="sd-variant" data-system="engine" data-option="advanced">
+                                <path d="M170 126 L145 132 L100 110 L100 190 L145 168 L170 174 Z"/>
+                                <path d="M100 128 L52 150 L100 172 Z" fill="url(#sdFlame)" stroke="none" class="sd-flame"/>
+                                <path d="M130 120 V180" class="sd-bp-detail"/>
+                            </g>
+                        </g>
+
+                        <!-- FUEL -->
+                        <g class="sd-zone" data-zone="fuel">
+                            <g class="sd-variant" data-system="fuel" data-option="compact">
+                                <rect x="225" y="184" width="90" height="26" rx="13"/>
+                                <path d="M250 184 V176 M290 184 V176" class="sd-bp-detail"/>
+                            </g>
+                            <g class="sd-variant" data-system="fuel" data-option="extended">
+                                <rect x="195" y="184" width="170" height="32" rx="16"/>
+                                <rect x="195" y="222" width="170" height="26" rx="13"/>
+                                <path d="M240 184 V176 M320 184 V176" class="sd-bp-detail"/>
+                            </g>
+                        </g>
+
+                        <!-- RADAR -->
+                        <g class="sd-zone" data-zone="radar">
+                            <path d="M425 120 V92" class="sd-bp-detail"/>
+                            <g class="sd-variant" data-system="radar" data-option="basic">
+                                <path d="M410 84 Q425 108 440 84 Z"/>
+                                <path d="M425 84 V72" class="sd-bp-detail"/>
+                            </g>
+                            <g class="sd-variant" data-system="radar" data-option="advanced">
+                                <path d="M398 78 Q425 118 452 78 Z"/>
+                                <path d="M425 78 V58" class="sd-bp-detail"/>
+                                <path d="M410 48 Q425 36 440 48 M402 38 Q425 18 448 38" fill="none" class="sd-bp-detail"/>
+                            </g>
+                        </g>
+
+                        <!-- SHIELD -->
+                        <g class="sd-zone" data-zone="shield">
+                            <g class="sd-variant" data-system="shield" data-option="lightweight">
+                                <path d="M498 108 Q528 150 498 192" fill="none" stroke-dasharray="6 5"/>
+                            </g>
+                            <g class="sd-variant" data-system="shield" data-option="heavy">
+                                <path d="M498 94 Q544 150 498 206" fill="none" class="sd-thick"/>
+                                <path d="M484 110 Q516 150 484 190" fill="none"/>
+                            </g>
+                        </g>
+
+                        <!-- POWER -->
+                        <g class="sd-zone" data-zone="power">
+                            <g class="sd-variant" data-system="power" data-option="solar">
+                                <path d="M225 120 V104 M355 120 V104" class="sd-bp-detail"/>
+                                <rect x="200" y="46" width="76" height="58"/>
+                                <rect x="284" y="46" width="76" height="58"/>
+                                <path d="M225 46 V104 M251 46 V104 M309 46 V104 M335 46 V104 M200 75 H276 M284 75 H360" class="sd-bp-detail"/>
+                            </g>
+                            <g class="sd-variant" data-system="power" data-option="nuclear">
+                                <path d="M215 120 V100" class="sd-bp-detail"/>
+                                <rect x="190" y="76" width="130" height="24" rx="12"/>
+                                <path d="M215 76 V58 M240 76 V58 M265 76 V58 M290 76 V58 M205 58 H300" class="sd-bp-detail"/>
+                            </g>
+                        </g>
+
+                        <!-- labels -->
+                        <g class="sd-bp-labels">
+                            <text x="40"  y="236">ENGINE</text>
+                            <text x="40"  y="268" class="sd-bp-sub" id="sdLblEngine"></text>
+                            <text x="395" y="268" id="sdLblFuel" class="sd-bp-sub"></text>
+                            <text x="395" y="252">FUEL</text>
+                            <text x="20"  y="40">POWER</text>
+                            <text x="20"  y="56" class="sd-bp-sub" id="sdLblPower"></text>
+                            <text x="400" y="18">RADAR</text>
+                            <text x="470" y="236" class="sd-bp-sub" id="sdLblShield"></text>
+                            <text x="470" y="222">SHIELD</text>
+                        </g>
+                    </svg>
+                </section>
+
+                <section class="sd-panel sd-summary" aria-live="polite">
+                    <div class="sd-panel-head">
+                        <span>LIVE DESIGN SUMMARY</span>
+                    </div>
+
+                    <div class="sd-stat-row">
+                        <div class="sd-stat">
+                            <span class="sd-stat-label">TOTAL MASS</span>
+                            <span class="sd-stat-value"><b id="sdMass">0</b> kg</span>
+                        </div>
+                        <div class="sd-stat">
+                            <span class="sd-stat-label">TOTAL COST</span>
+                            <span class="sd-stat-value"><b id="sdCost">0</b> cr</span>
+                        </div>
+                    </div>
+
+                    <div class="sd-meter">
+                        <div class="sd-meter-head">
+                            <span>BUDGET</span>
+                            <span><b id="sdBudgetText">0 / 0</b></span>
+                        </div>
+                        <div class="sd-bar"><div class="sd-bar-fill" id="sdBudgetBar"></div></div>
+                    </div>
+
+                    <div class="sd-meter">
+                        <div class="sd-meter-head">
+                            <span>POWER BALANCE</span>
+                            <span><b id="sdPowerText">0 W</b></span>
+                        </div>
+                        <div class="sd-bar"><div class="sd-bar-fill" id="sdPowerBar"></div></div>
+                        <div class="sd-meter-foot">
+                            <span>Generation <b id="sdGen">0</b> W</span>
+                            <span>Consumption <b id="sdCon">0</b> W</span>
+                        </div>
+                    </div>
+
+                    <h3 class="sd-mini-title">PERFORMANCE FORECAST</h3>
+                    <div class="sd-ratings" id="sdRatings"></div>
+
+                    <ul class="sd-warnings" id="sdWarnings"></ul>
+
+                    <div class="sd-actions">
+                        <button type="button" class="sd-btn sd-btn-ghost" id="sdReset">RESET</button>
+                        <button type="button" class="sd-btn sd-btn-primary" id="sdLaunch">LAUNCH MISSION &rarr;</button>
+                    </div>
+                </section>
+
+            </aside>
+        </div>
+    </main>
+
+    <footer class="sd-footer">
+        ORBIT ARCHITECT &bull; SPACECRAFT MISSION DESIGN &bull; FICTIONAL GAME SPECIFICATIONS
+    </footer>
+
+    <script src="JS/spacecraftData.js"></script>
+    <script src="JS/spacecraftDesign.js"></script>
+</body>
+</html>

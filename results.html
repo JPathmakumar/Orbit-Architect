@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mission Results | Orbit Architect</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top, #172c58 0%, #080f22 45%, #030711 100%);
+            color: white;
+            font-family: 'VT323', monospace;
+            padding: 30px 15px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .logo {
+            color: #55c9ff;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .subtitle {
+            color: #91a8c9;
+            font-size: 24px;
+            letter-spacing: 4px;
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: clamp(22px, 5vw, 42px);
+            color: #ffffff;
+            margin: 25px 0 15px;
+            text-shadow: 0 0 25px #168dff;
+        }
+
+        .status {
+            display: inline-block;
+            color: #6cffb0;
+            border: 1px solid #39d994;
+            padding: 9px 18px;
+            letter-spacing: 3px;
+            font-size: 20px;
+        }
+
+        .score-card {
+            background: linear-gradient(135deg, #142c53, #0a1731);
+            border: 1px solid #287ac4;
+            border-radius: 15px;
+            padding: 35px 20px;
+            text-align: center;
+            box-shadow: 0 0 35px #0878ff22;
+            margin-bottom: 25px;
+        }
+
+        .score-label {
+            color: #8fb8e9;
+            font-size: 25px;
+            letter-spacing: 4px;
+        }
+
+        .score {
+            font-family: 'Press Start 2P', monospace;
+            color: #55d7ff;
+            font-size: clamp(35px, 8vw, 65px);
+            margin: 25px 0;
+            text-shadow: 0 0 25px #009dff;
+        }
+
+        .rank {
+            color: #ffd76b;
+            font-family: 'Press Start 2P', monospace;
+            font-size: clamp(12px, 3vw, 19px);
+            line-height: 1.8;
+        }
+
+        .section-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 15px;
+            color: #69caff;
+            margin: 35px 0 18px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat-card {
+            background: #101d36;
+            border: 1px solid #263f65;
+            border-radius: 12px;
+            padding: 23px;
+            text-align: center;
+        }
+
+        .stat-number {
+            color: #ffffff;
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: #8da9cc;
+            font-size: 21px;
+            letter-spacing: 2px;
+        }
+
+        .achievement-panel {
+            background: #101d36;
+            border: 1px solid #263f65;
+            border-radius: 12px;
+            padding: 25px;
+            min-height: 100px;
+        }
+
+        .achievement {
+            color: #ffd76b;
+            font-size: 24px;
+            padding: 8px 0;
+        }
+
+        .empty {
+            color: #8295b3;
+            font-size: 22px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 35px 0;
+        }
+
+        button {
+            padding: 16px 25px;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.2);
+        }
+
+        .playAgain {
+            background: #168dff;
+            color: white;
+        }
+
+        .home {
+            background: #1d2e4c;
+            color: white;
+            border: 1px solid #5275a8;
+        }
+
+        .footer {
+            text-align: center;
+            color: #617895;
+            font-size: 20px;
+            margin-top: 35px;
+        }
+
+        .saved-time {
+            color: #7189a8;
+            text-align: center;
+            font-size: 18px;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 550px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            button {
+                width: 100%;
+                padding: 18px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <div class="logo">ORBIT ARCHITECT</div>
+
+        <div class="subtitle">MISSION CONTROL REPORT</div>
+
+        <h1>MISSION RESULTS</h1>
+
+        <div class="status" id="missionStatus">
+            MISSION REPORT
+        </div>
+    </header>
+
+    <section class="score-card">
+
+        <div class="score-label">TOTAL MISSION SCORE</div>
+
+        <div class="score" id="finalScore">0/1000</div>
+
+        <div class="rank" id="playerRank">
+            ROOKIE EXPLORER
+        </div>
+
+    </section>
+
+    <h2 class="section-title">MISSION STATISTICS</h2>
+
+    <section class="stats-grid">
+
+        <div class="stat-card">
+            <div class="stat-number" id="missionsCompleted">0</div>
+            <div class="stat-label">MISSIONS COMPLETED</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-number" id="challengesCompleted">0</div>
+            <div class="stat-label">CHALLENGES COMPLETED</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-number" id="samplesCollected">0</div>
+            <div class="stat-label">EUROPA SAMPLES</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-number" id="achievementCount">0</div>
+            <div class="stat-label">ACHIEVEMENTS</div>
+        </div>
+
+    </section>
+
+    <h2 class="section-title">UNLOCKED ACHIEVEMENTS</h2>
+
+    <section class="achievement-panel" id="achievementList">
+        <p class="empty">No achievements recorded yet.</p>
+    </section>
+
+    <div class="saved-time" id="savedTime"></div>
+
+    <div class="buttons">
+
+        <button class="playAgain" onclick="playAgain()">
+            Play Again
+        </button>
+
+    </div>
+
+    <footer class="footer">
+        ORBIT ARCHITECT © 2026
+        <br><br>
+        EXPLORE SPACE. SOLVE CHALLENGES. BUILD THE FUTURE.
+    </footer>
+
+</div>
+
+<!-- GAME SYSTEMS -->
+<script src="JS/events.js"></script>
+<script src="JS/scoring.js"></script>
+<script src="JS/saveSystem.js"></script>
+
+<script>
+"use strict";
+
+/* ==========================================
+   ORBIT ARCHITECT RESULTS SYSTEM
+   GLOBAL SCORE: 0 - 1000
+========================================== */
+
+function loadResults() {
+
+    // Load saved game information
+    const saved = window.OrbitSave
+        ? window.OrbitSave.load()
+        : null;
+
+    // Read the global score saved by mission.js
+    const storedScore = localStorage.getItem("orbitScore");
+
+    let finalScore = 0;
+
+    if (storedScore !== null) {
+        finalScore = Number(storedScore);
+    } else if (saved && saved.score !== undefined) {
+        finalScore = Number(saved.score);
+    }
+
+    // Validate and limit score
+    if (!Number.isFinite(finalScore)) {
+        finalScore = 0;
+    }
+
+    finalScore = Math.max(0, Math.min(1000, finalScore));
+
+    // Display global score
+    document.getElementById("finalScore").textContent =
+        `${finalScore.toLocaleString()}/1000`;
+
+    // Calculate rank
+    let rank = "ROOKIE EXPLORER";
+
+    if (finalScore >= 900) {
+        rank = "LEGENDARY EXPLORER";
+    } else if (finalScore >= 750) {
+        rank = "MASTER EXPLORER";
+    } else if (finalScore >= 500) {
+        rank = "SPACE ENGINEER";
+    } else if (finalScore >= 250) {
+        rank = "JUNIOR EXPLORER";
+    }
+
+    document.getElementById("playerRank").textContent =
+        saved?.rank || rank;
+
+    // No saved report
+    if (!saved) {
+
+        document.getElementById("missionStatus").textContent =
+            "SCORE REPORT LOADED";
+
+        document.getElementById("achievementList").innerHTML =
+            '<p class="empty">No achievements recorded yet.</p>';
+
+        return;
+    }
+
+    // Mission statistics
+    document.getElementById("missionsCompleted").textContent =
+        saved.missionsCompleted || 0;
+
+    document.getElementById("challengesCompleted").textContent =
+        saved.challengesCompleted || 0;
+
+    document.getElementById("samplesCollected").textContent =
+        saved.samplesCollected || saved.iceSamples || 0;
+
+    // Achievements
+    const achievements = Array.isArray(saved.achievements)
+        ? saved.achievements
+        : [];
+
+    document.getElementById("achievementCount").textContent =
+        achievements.length;
+
+    const list = document.getElementById("achievementList");
+
+    list.replaceChildren();
+
+    if (achievements.length === 0) {
+
+        const message = document.createElement("p");
+
+        message.className = "empty";
+
+        message.textContent =
+            "No achievements unlocked yet.";
+
+        list.appendChild(message);
+
+    } else {
+
+        achievements.forEach(name => {
+
+            const item = document.createElement("div");
+
+            item.className = "achievement";
+
+            item.textContent = "★ " + name;
+
+            list.appendChild(item);
+
+        });
+
+    }
+
+    // Saved date
+    if (saved.savedAt) {
+
+        const date = new Date(saved.savedAt);
+
+        if (!Number.isNaN(date.getTime())) {
+
+            document.getElementById("savedTime").textContent =
+                "REPORT SAVED: " + date.toLocaleString();
+
+        }
+
+    }
+
+    document.getElementById("missionStatus").textContent =
+        "REPORT LOADED";
+
+}
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+
+function playAgain() {
+
+    // Clear the previous mission score
+    localStorage.removeItem("orbitScore");
+
+    if (window.OrbitSave) {
+        OrbitSave.deleteSave();
+    }
+
+    window.location.href = "index.html";
+
+}
+
+
+
+/* ==========================================
+   START RESULTS PAGE
+========================================== */
+
+loadResults();
+
+</script>
+
+    <script src="JS/mission.js"></script>
+</body>
+</html>

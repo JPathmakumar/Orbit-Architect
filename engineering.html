@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit Architect | Engineering Simulator</title>
+    <link rel="stylesheet" href="CSS/global.css">
+</head>
+
+<body>
+
+<main class="engineering-screen">
+
+    <nav class="engineering-nav">
+        <a href="index.html" class="engineering-logo">ORBIT ARCHITECT</a>
+        <span>ENGINEERING DIVISION // 004</span>
+        <span class="live-status">● SYSTEM ONLINE</span>
+    </nav>
+
+    <header class="engineering-header">
+        <p class="engineering-eyebrow">EUROPA EXPLORATION PROGRAM</p>
+        <h1>ENGINEERING SIMULATOR</h1>
+        <p>Commander, your spacecraft needs final system testing before launch.</p>
+    </header>
+
+
+<!-- NASA SCIENTIST -->
+<section class="scientist-area" id="scientistArea">
+
+    <div class="scientist-character">
+        <div class="scientist-avatar">👨‍🚀</div>
+        <span>NASA SCIENTIST</span>
+    </div>
+
+    <div class="scientist-bubble">
+
+        <p id="scientistText">
+            Welcome, Commander! Before launching, we need to
+            test every important spacecraft system.
+        </p>
+
+        <div class="scientist-controls">
+            <span id="scientistCounter">MESSAGE 1</span>
+
+            <button id="scientistNext" aria-label="Next message">
+                ✓
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+
+    <section class="engineering-stats">
+        <div class="engineering-stat">
+            <span>ENGINEERING XP</span>
+            <strong id="xpValue">000</strong>
+        </div>
+
+        <div class="engineering-stat">
+            <span>CHALLENGES</span>
+            <strong id="challengeValue">0 / 4</strong>
+        </div>
+
+        <div class="engineering-stat">
+            <span>SYSTEM STATUS</span>
+            <strong id="systemStatus">UNTESTED</strong>
+        </div>
+    </section>
+
+    <section class="engineering-layout">
+
+        <aside class="challenge-sidebar">
+            <h2>MISSION CHECKLIST</h2>
+            <p class="engineering-small">Complete all four system challenges.</p>
+
+            <button class="challenge-tab active" data-challenge="power">
+                <span>01</span>
+                POWER CIRCUIT
+                <b id="powerStatus">LOCKED</b>
+            </button>
+
+            <button class="challenge-tab" data-challenge="engine">
+                <span>02</span>
+                ENGINE CALIBRATION
+                <b id="engineStatus">LOCKED</b>
+            </button>
+
+            <button class="challenge-tab" data-challenge="antenna">
+                <span>03</span>
+                ANTENNA ALIGNMENT
+                <b id="antennaStatus">LOCKED</b>
+            </button>
+
+            <button class="challenge-tab" data-challenge="shield">
+                <span>04</span>
+                RADIATION SHIELDING
+                <b id="shieldStatus">LOCKED</b>
+            </button>
+        </aside>
+
+        <section class="engineering-game-panel">
+
+            <div class="game-panel-top">
+                <span id="challengeNumber">CHALLENGE 01 / 04</span>
+                <span class="simulation-indicator">SIMULATION ACTIVE</span>
+            </div>
+
+            <div id="challengeContent">
+
+                <div class="challenge-intro">
+                    <div class="challenge-icon">⚡</div>
+                    <h2>POWER CIRCUIT</h2>
+                    <p>
+                        Restore the spacecraft's electrical connection.
+                        Activate the power nodes in the correct sequence.
+                    </p>
+                </div>
+
+                <div class="circuit-board">
+                    <div class="circuit-node" data-node="1">01</div>
+                    <div class="circuit-line"></div>
+                    <div class="circuit-node" data-node="2">02</div>
+                    <div class="circuit-line"></div>
+                    <div class="circuit-node" data-node="3">03</div>
+                </div>
+
+                <p class="game-instruction" id="gameInstruction">
+                    ACTIVATE NODE 01 → NODE 02 → NODE 03
+                </p>
+
+                <div class="game-controls">
+                    <button id="resetChallenge" class="game-button secondary">
+                        RESET PUZZLE
+                    </button>
+                </div>
+
+            </div>
+
+            <div id="gameMessage" class="game-message" role="status" aria-live="polite">
+                ENGINEERING SIMULATION READY.
+            </div>
+
+        </section>
+
+    </section>
+
+    <section class="engineering-bottom">
+
+        <div class="engineering-log">
+            <h2>ENGINEERING LOG</h2>
+            <div id="engineeringLog">
+                <p>> SYSTEM INITIALIZED.</p>
+                <p>> AWAITING ENGINEERING TESTS...</p>
+            </div>
+        </div>
+
+        <div class="launch-unlock">
+            <div>
+                <span class="engineering-eyebrow">FINAL AUTHORIZATION</span>
+                <h2 id="launchTitle">LAUNCH LOCKED</h2>
+                <p id="launchDescription">
+                    Complete all four engineering challenges to unlock launch.
+                </p>
+            </div>
+
+            <button id="launchButton" class="launch-button" disabled>
+                INITIATE LAUNCH →
+            </button>
+        </div>
+
+    </section>
+
+    <footer class="engineering-footer">
+        ORBIT ARCHITECT // EUROPA MISSION
+        <span>ALL VALUES ARE SIMULATED FOR GAMEPLAY.</span>
+    </footer>
+
+</main>
+
+<script src="JS/dialogues/engineeringDialogue.js" defer></script>
+<script type="module" src="JS/engineering.js"></script>
+
+</body>
+</html>
